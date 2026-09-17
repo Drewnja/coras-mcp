@@ -34,7 +34,18 @@ jobs:
         if: runner.os != 'Windows'
         run: bash java/build.sh
 
+      # The editor builds an AWT drag-and-drop target while loading a diagram,
+      # so the round trip through it needs a display even off-screen.
+      - name: Install Xvfb
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y xvfb
+
       - name: Run the tests
+        if: runner.os == 'Linux'
+        run: xvfb-run -a python tests/test_coras_mcp.py
+
+      - name: Run the tests
+        if: runner.os != 'Linux'
         run: python tests/test_coras_mcp.py
 
   npx:

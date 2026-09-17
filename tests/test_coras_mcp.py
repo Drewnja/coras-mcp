@@ -46,16 +46,19 @@ note   -> leak
 
 
 def java_ready():
+    """Java, the editor's jars, and a display the editor's AWT can use."""
     if not bridge.java_available():
         return False
     try:
         bridge.find_tool_dir()
     except bridge.BridgeError:
         return False
-    return True
+    return bridge.display_available()
 
 
-needs_java = unittest.skipUnless(java_ready(), "no Java or no Threat Modelling Tool jars")
+needs_java = unittest.skipUnless(
+    java_ready(), "needs Java, the Threat Modelling Tool jars and a display "
+                  "(on headless Linux: xvfb-run)")
 
 
 class TestMetrics(unittest.TestCase):

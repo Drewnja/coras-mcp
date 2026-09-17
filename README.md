@@ -88,6 +88,10 @@ It is an ordinary stdio MCP server. Command `npx`, arguments `-y coras-mcp`.
 | **Python 3.8+** | runs the server. Already on macOS and Linux; on Windows install it, or install [uv](https://docs.astral.sh/uv/) and the launcher will use that instead. |
 | **Java 8+** | *optional.* Needed only to render a diagram, validate it against the real editor, or open the editor. Writing and reading `.dgx` works without it. |
 
+The editor builds an AWT drag-and-drop target while loading a diagram, so those
+three tools need a display even when they draw off-screen. On a headless Linux
+box, run under Xvfb (`xvfb-run -a …`); everything else works without one.
+
 No Python packages, no `pip install`, no virtualenv — the server has zero
 dependencies and talks MCP over stdio directly.
 

@@ -155,6 +155,34 @@ def java_available():
     return find_java() is not None
 
 
+_DISPLAY = {}
+
+
+def display_available(tool_dir=None):
+    """Can the editor's AWT code actually run here?
+
+    The editor builds a java.awt.dnd.DropTarget while constructing a diagram,
+    which needs a real display even when nothing is shown on screen. On a
+    headless Linux box that fails, so validating, rendering and opening all
+    need a display (or Xvfb).
+    """
+    if "value" in _DISPLAY:
+        return _DISPLAY["value"]
+    try:
+        _DISPLAY["value"] = bool(info(tool_dir).get("display"))
+    except (BridgeError, OSError):
+        _DISPLAY["value"] = False
+    return _DISPLAY["value"]
+
+
+HEADLESS_HINT = (
+    "the CORAS editor needs a display: it builds an AWT drag-and-drop target "
+    "while loading a diagram, which fails without one. On a headless Linux "
+    "machine install Xvfb and run under it, for example `xvfb-run -a ...`. "
+    "Writing and reading .dgx files does not need a display."
+)
+
+
 # --------------------------------------------------------------------------
 # Building the helper jar
 # --------------------------------------------------------------------------
@@ -227,10 +255,19 @@ def run(args, tool_dir=None, timeout=120, gui=False):
     if payload is None:
         detail = (result.stderr or result.stdout or "").strip()
         raise BridgeError("the Java helper produced no result%s"
-                          % (":\n" + detail[-2000:] if detail else ""))
+                          % (":\n" + _explain(detail)[-2000:] if detail else ""))
     if not payload.get("ok", False):
-        raise BridgeError(payload.get("error") or "the Java helper reported a failure")
+        raise BridgeError(_explain(payload.get("error")
+                                   or "the Java helper reported a failure"))
     return payload
+
+
+def _explain(message):
+    """Turn the JVM's X11 complaint into something actionable."""
+    text = message or ""
+    if "X11" in text or "HeadlessException" in text or "DISPLAY" in text:
+        return text + "\n" + HEADLESS_HINT
+    return text
 
 
 def run_detached(args, tool_dir=None, timeout=45):
@@ -266,7 +303,8 @@ def run_detached(args, tool_dir=None, timeout=45):
             except Exception:                  # pragma: no cover
                 pass
             raise BridgeError("the editor exited straight away%s"
-                              % (":\n" + stderr.strip()[-2000:] if stderr.strip() else ""))
+                              % (":\n" + _explain(stderr.strip())[-2000:]
+                                 if stderr.strip() else ""))
         return {"ok": True, "note": "the editor is starting"}
     if not payload.get("ok", False):
         raise BridgeError(payload.get("error") or "the editor reported a failure")
