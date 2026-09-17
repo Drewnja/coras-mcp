@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<cp:model xmlns:cp="http://coras.sourceforge.net/profile/1.0">
+    <cp:modelElements>
+        <cp:stakeholder name="The bank" id="I6a836d3a-f305-4ca7-8a3a-f743e3cdef0d"/>
+        <cp:asset name="Customer data" id="Ic6aed025-ae2a-40c7-824d-d96f4213696f"/>
+        <cp:asset name="Reputation" id="I9ff84ec8-854d-40ea-b3a8-e8d00702b803"/>
+        <cp:threat stereotype="ThreatHumanDeliberate" name="Script kiddie" id="Ie2ac9f50-811b-4036-a31f-c1e4fd51aeb3"/>
+        <cp:threat stereotype="ThreatHumanAccidental" name="Careless employee" id="I3c7c36a1-23c1-480f-b2c5-7efe2a88169c"/>
+        <cp:threat stereotype="ThreatNonHuman" name="Malware" id="I24e29ed5-8bba-4bb8-a0ae-5ca76dbc8760"/>
+        <cp:vulnerability name="Weak password policy" id="I05413e7b-c138-4965-a3b1-da8480fa7b55"/>
+        <cp:vulnerability name="Unpatched web server" id="I2c192d4e-82fd-4be9-8552-33702bd61538"/>
+        <cp:threatScenario name="Password guessed by brute force" id="I63ed52d6-2665-4101-b26e-6305b6e16608"/>
+        <cp:threatScenario name="Server compromised" id="Ic33e05a7-458f-4842-8a9a-3bc54661cefa"/>
+        <cp:unwantedIncident name="Customer records leaked" id="Ifa6e2446-d984-46b5-88a2-a6acd0c3c463"/>
+        <cp:unwantedIncident name="Service unavailable" id="I5bc013cd-f1f7-4068-b03b-c1e990898d97"/>
+        <cp:treatment name="Enforce two-factor auth" id="I3254d63a-2145-49a8-882e-18d170571b6f"/>
+        <cp:treatment name="Monthly patch window" id="Ie6fb3c15-7b0c-4dcf-9173-fb2a6d9093bb"/>
+        <cp:comment name="Reviewed by security team, Sept 2026" id="I63a15493-5b61-4a02-a726-836e3dc0047c"/>
+        <cp:ownershipRelationship target="Ic6aed025-ae2a-40c7-824d-d96f4213696f" source="I6a836d3a-f305-4ca7-8a3a-f743e3cdef0d" id="I2f69aa21-c0cb-4e8d-9785-9230eead50af"/>
+        <cp:ownershipRelationship target="I9ff84ec8-854d-40ea-b3a8-e8d00702b803" source="I6a836d3a-f305-4ca7-8a3a-f743e3cdef0d" id="I2f2ed1ca-e7b8-43d7-a2b9-30f5b55d934f"/>
+        <cp:dependencyRelationship target="I9ff84ec8-854d-40ea-b3a8-e8d00702b803" source="Ic6aed025-ae2a-40c7-824d-d96f4213696f" id="I4ab4edb7-e04e-4786-9d46-cb626ee691c2"/>
+        <cp:exploitRelationship target="I05413e7b-c138-4965-a3b1-da8480fa7b55" source="Ie2ac9f50-811b-4036-a31f-c1e4fd51aeb3" id="I4f49ea58-3565-4e3c-899e-820854e71902"/>
+        <cp:exploitRelationship target="I05413e7b-c138-4965-a3b1-da8480fa7b55" source="I3c7c36a1-23c1-480f-b2c5-7efe2a88169c" id="Ibd740e30-37f9-44c4-9d66-8510dc775522"/>
+        <cp:exploitRelationship target="I2c192d4e-82fd-4be9-8552-33702bd61538" source="I24e29ed5-8bba-4bb8-a0ae-5ca76dbc8760" id="Ifae1b03f-4749-41d2-9786-e465c22e5969"/>
+        <cp:initiateRelationship target="I63ed52d6-2665-4101-b26e-6305b6e16608" source="I05413e7b-c138-4965-a3b1-da8480fa7b55" id="Id2cf045c-c556-451a-a6d3-2ee4f96917e1">
+            <consequence>likely</consequence>
+        </cp:initiateRelationship>
+        <cp:initiateRelationship target="Ic33e05a7-458f-4842-8a9a-3bc54661cefa" source="I2c192d4e-82fd-4be9-8552-33702bd61538" id="Ia1ddbfc1-d160-4bee-bdf3-d022a98f0f56">
+            <consequence>possible</consequence>
+        </cp:initiateRelationship>
+        <cp:initiateRelationship target="Ifa6e2446-d984-46b5-88a2-a6acd0c3c463" source="I63ed52d6-2665-4101-b26e-6305b6e16608" id="Ie8a59c9b-0170-490e-a88d-09bce6037784">
+            <consequence>likely</consequence>
+        </cp:initiateRelationship>
+        <cp:initiateRelationship target="Ifa6e2446-d984-46b5-88a2-a6acd0c3c463" source="Ic33e05a7-458f-4842-8a9a-3bc54661cefa" id="Ibfb70246-5263-4f19-9a9d-7d25c365af90">
+            <consequence>possible</consequence>
+        </cp:initiateRelationship>
+        <cp:initiateRelationship target="I5bc013cd-f1f7-4068-b03b-c1e990898d97" source="Ic33e05a7-458f-4842-8a9a-3bc54661cefa" id="I6e5d94f1-ae18-4778-b3d3-8f7b00cd511a">
+            <consequence>rare</consequence>
+        </cp:initiateRelationship>
+        <cp:harmRelationship target="Ic6aed025-ae2a-40c7-824d-d96f4213696f" source="Ifa6e2446-d984-46b5-88a2-a6acd0c3c463" id="I41fcfa4a-653e-4c2a-8327-73c065f0dc85">
+            <consequence>major</consequence>
+        </cp:harmRelationship>
+        <cp:harmRelationship target="I9ff84ec8-854d-40ea-b3a8-e8d00702b803" source="Ifa6e2446-d984-46b5-88a2-a6acd0c3c463" id="I65807ed4-a04b-4029-b8d5-0b5e3d5b2ecf">
+            <consequence>moderate</consequence>
+        </cp:harmRelationship>
+        <cp:harmRelationship target="I9ff84ec8-854d-40ea-b3a8-e8d00702b803" source="I5bc013cd-f1f7-4068-b03b-c1e990898d97" id="I13bac09f-3b35-4666-b9ba-34d55b75a49a">
+            <consequence>minor</consequence>
+        </cp:harmRelationship>
+        <cp:treatRelationship strategy="ReduceLikelihood" target="I63ed52d6-2665-4101-b26e-6305b6e16608" source="I3254d63a-2145-49a8-882e-18d170571b6f" id="If02a4f3d-9de0-4ef1-8c8c-d6409404ad6f"/>
+        <cp:treatRelationship strategy="ReduceLikelihood" target="I2c192d4e-82fd-4be9-8552-33702bd61538" source="Ie6fb3c15-7b0c-4dcf-9173-fb2a6d9093bb" id="If7cab0e6-324b-4b27-9cb6-a18a1d64633f"/>
+        <cp:commentRelationship target="Ifa6e2446-d984-46b5-88a2-a6acd0c3c463" source="I63a15493-5b61-4a02-a726-836e3dc0047c" id="Ie8e7bbc7-3b18-48b1-b151-b4174695788c"/>
+    </cp:modelElements>
+    <cp:diagrams>
+        <cp:diagram name="Online banking risks" id="Id22ff18f-6625-46e4-8202-19fdb92a4efa">
+            <cp:diagramElements>
+                <cp:stakeholderNode modelElement="I6a836d3a-f305-4ca7-8a3a-f743e3cdef0d">
+                    <cp:font size="12" style="0" name="SansSerif"/>
+                    <cp:bounds height="50.0" width="50.0" y="30.0" x="1140.0"/>
+                    <cp:backgroundColor blue="255" green="255" red="255"/>
+                </cp:stakeholderNode>
+                <cp:assetNode modelElement="Ic6aed025-ae2a-40c7-824d-d96f4213696f">
+                    <cp:font size="12" style="0" name="SansSerif"/>
+                    <cp:bounds height="35.0" width="35.0" y="170.0" x="1220.0"/>
+                    <cp:backgroundColor blue="255" green="255" red="255"/>
+                </cp:assetNode>
+                <cp:assetNode modelElement="I9ff84ec8-854d-40ea-b3a8-e8d00702b803">
+                    <cp:font size="12" style="0" name="SansSerif"/>
+                    <cp:bounds height="35.0" width="35.0" y="280.0" x="1220.0"/>
+                    <cp:backgroundColor blue="255" green="255" red="255"/>
+                </cp:assetNode>
+                <cp:threatNode modelElement="Ie2ac9f50-811b-4036-a31f-c1e4fd51aeb3">
+                    <cp:font size="12" style="0" name="SansSerif"/>
+                    <cp:bounds height="50.0" width="50.0" y="30.0" x="100.0"/>
+                    <cp:backgroundColor blue="255" green="255" red="255"/>
+                </cp:threatNode>
+                <cp:threatNode modelElement="I3c7c36a1-23c1-480f-b2c5-7efe2a88169c">
+                    <cp:font size="12" style="0" name="SansSerif"/>
+                    <cp:bounds height="50.0" width="50.0" y="170.0" x="100.0"/>
+                    <cp:backgroundColor blue="255" green="255" red="255"/>
+                </cp:threatNode>
+                <cp:threatNode modelElement="I24e29ed5-8bba-4bb8-a0ae-5ca76dbc8760">
+                    <cp:font size="12" style="0" name="SansSerif"/>
+                    <cp:bounds height="50.0" width="50.0" y="300.0" x="100.0"/>
+                    <cp:backgroundColor blue="255" green="255" red="255"/>
+                </cp:threatNode>
+                <cp:vulnerabilityNode modelElement="I05413e7b-c138-4965-a3b1-da8480fa7b55">
+                    <cp:font size="12" style="0" name="SansSerif"/>
+                    <cp:bounds height="30.0" width="30.0" y="120.0" x="390.0"/>
+                    <cp:backgroundColor blue="255" green="255" red="255"/>
+                </cp:vulnerabilityNode>
+                <cp:vulnerabilityNode modelElement="I2c192d4e-82fd-4be9-8552-33702bd61538">
+                    <cp:font size="12" style="0" name="SansSerif"/>
+                    <cp:bounds height="30.0" width="30.0" y="330.0" x="390.0"/>
+                    <cp:backgroundColor blue="255" green="255" red="255"/>
+                </cp:vulnerabilityNode>
+                <cp:threatScenarioNode modelElement="I63ed52d6-2665-4101-b26e-6305b6e16608">
+                    <cp:font size="12" style="0" name="SansSerif"/>
+                    <cp:bounds height="60.0" width="273.0" y="190.0" x="600.0"/>
+                    <cp:backgroundColor blue="255" green="255" red="255"/>
+                </cp:threatScenarioNode>
+                <cp:threatScenarioNode modelElement="Ic33e05a7-458f-4842-8a9a-3bc54661cefa">
+                    <cp:font size="12" style="0" name="SansSerif"/>
+                    <cp:bounds height="60.0" width="177.0" y="280.0" x="640.0"/>
+                    <cp:backgroundColor blue="255" green="255" red="255"/>
+                </cp:threatScenarioNode>
+                <cp:unwantedIncidentNode modelElement="Ifa6e2446-d984-46b5-88a2-a6acd0c3c463">
+                    <cp:font size="12" style="0" name="SansSerif"/>
+                    <cp:bounds height="70.0" width="140.0" y="180.0" x="960.0"/>
+                    <cp:backgroundColor blue="255" green="255" red="255"/>
+                </cp:unwantedIncidentNode>
+                <cp:unwantedIncidentNode modelElement="I5bc013cd-f1f7-4068-b03b-c1e990898d97">
+                    <cp:font size="12" style="0" name="SansSerif"/>
+                    <cp:bounds height="60.0" width="140.0" y="290.0" x="960.0"/>
+                    <cp:backgroundColor blue="255" green="255" red="255"/>
+                </cp:unwantedIncidentNode>
+                <cp:treatmentNode modelElement="I3254d63a-2145-49a8-882e-18d170571b6f">
+                    <cp:font size="12" style="0" name="SansSerif"/>
+                    <cp:bounds height="60.0" width="199.0" y="230.0" x="310.0"/>
+                    <cp:backgroundColor blue="255" green="255" red="255"/>
+                </cp:treatmentNode>
+                <cp:treatmentNode modelElement="Ie6fb3c15-7b0c-4dcf-9173-fb2a6d9093bb">
+                    <cp:font size="12" style="0" name="SansSerif"/>
+                    <cp:bounds height="60.0" width="187.0" y="430.0" x="30.0"/>
+                    <cp:backgroundColor blue="255" green="255" red="255"/>
+                </cp:treatmentNode>
+                <cp:commentNode modelElement="I63a15493-5b61-4a02-a726-836e3dc0047c">
+                    <cp:font size="12" style="0" name="SansSerif"/>
+                    <cp:bounds height="60.0" width="146.0" y="360.0" x="760.0"/>
+                    <cp:backgroundColor blue="0" green="255" red="255"/>
+                </cp:commentNode>
+                <cp:ownershipEdge modelElement="I2f69aa21-c0cb-4e8d-9785-9230eead50af">
+                    <cp:lineColor blue="0" green="0" red="0"/>
+                </cp:ownershipEdge>
+                <cp:ownershipEdge modelElement="I2f2ed1ca-e7b8-43d7-a2b9-30f5b55d934f">
+                    <cp:lineColor blue="0" green="0" red="0"/>
+                </cp:ownershipEdge>
+                <cp:dependencyEdge modelElement="I4ab4edb7-e04e-4786-9d46-cb626ee691c2">
+                    <cp:lineColor blue="0" green="0" red="0"/>
+                </cp:dependencyEdge>
+                <cp:exploitEdge modelElement="I4f49ea58-3565-4e3c-899e-820854e71902">
+                    <cp:lineColor blue="0" green="0" red="0"/>
+                </cp:exploitEdge>
+                <cp:exploitEdge modelElement="Ibd740e30-37f9-44c4-9d66-8510dc775522">
+                    <cp:lineColor blue="0" green="0" red="0"/>
+                </cp:exploitEdge>
+                <cp:exploitEdge modelElement="Ifae1b03f-4749-41d2-9786-e465c22e5969">
+                    <cp:lineColor blue="0" green="0" red="0"/>
+                </cp:exploitEdge>
+                <cp:initiateEdge modelElement="Id2cf045c-c556-451a-a6d3-2ee4f96917e1">
+                    <cp:lineColor blue="0" green="0" red="0"/>
+                </cp:initiateEdge>
+                <cp:initiateEdge modelElement="Ia1ddbfc1-d160-4bee-bdf3-d022a98f0f56">
+                    <cp:lineColor blue="0" green="0" red="0"/>
+                </cp:initiateEdge>
+                <cp:initiateEdge modelElement="Ie8a59c9b-0170-490e-a88d-09bce6037784">
+                    <cp:lineColor blue="0" green="0" red="0"/>
+                </cp:initiateEdge>
+                <cp:initiateEdge modelElement="Ibfb70246-5263-4f19-9a9d-7d25c365af90">
+                    <cp:lineColor blue="0" green="0" red="0"/>
+                </cp:initiateEdge>
+                <cp:initiateEdge modelElement="I6e5d94f1-ae18-4778-b3d3-8f7b00cd511a">
+                    <cp:lineColor blue="0" green="0" red="0"/>
+                </cp:initiateEdge>
+                <cp:harmEdge modelElement="I41fcfa4a-653e-4c2a-8327-73c065f0dc85">
+                    <cp:lineColor blue="0" green="0" red="0"/>
+                </cp:harmEdge>
+                <cp:harmEdge modelElement="I65807ed4-a04b-4029-b8d5-0b5e3d5b2ecf">
+                    <cp:lineColor blue="0" green="0" red="0"/>
+                </cp:harmEdge>
+                <cp:harmEdge modelElement="I13bac09f-3b35-4666-b9ba-34d55b75a49a">
+                    <cp:lineColor blue="0" green="0" red="0"/>
+                </cp:harmEdge>
+                <cp:treatEdge modelElement="If02a4f3d-9de0-4ef1-8c8c-d6409404ad6f">
+                    <cp:lineColor blue="0" green="0" red="0"/>
+                </cp:treatEdge>
+                <cp:treatEdge modelElement="If7cab0e6-324b-4b27-9cb6-a18a1d64633f">
+                    <cp:lineColor blue="0" green="0" red="0"/>
+                </cp:treatEdge>
+                <cp:commentEdge modelElement="Ie8e7bbc7-3b18-48b1-b151-b4174695788c">
+                    <cp:lineColor blue="0" green="0" red="0"/>
+                </cp:commentEdge>
+            </cp:diagramElements>
+        </cp:diagram>
+    </cp:diagrams>
+</cp:model>

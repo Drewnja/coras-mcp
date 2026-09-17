@@ -1,0 +1,42 @@
+# CORAS threat diagram: how a threat reaches an asset.
+#
+# The story reads left to right:
+#   threat -> vulnerability -> threat scenario -> unwanted incident -> asset
+# The text on an arrow is the likelihood, and on a harm arrow the consequence.
+
+diagram "Threats to the clinical record"
+
+threat        "Curious staff member"                as curious  kind=accidental
+threat        "Ransomware"                          as ransom   kind=non-human
+threat        "Outside attacker"                    as outsider kind=deliberate
+
+vulnerability "Shared clinical workstation login"   as shared
+vulnerability "No offline backup"                   as nobackup
+vulnerability "Unpatched VPN gateway"               as vpn
+
+scenario      "Staff member browses records out of curiosity" as browse
+scenario      "Files encrypted by ransomware"       as encrypted
+scenario      "Attacker reaches the internal network" as inside
+
+incident      "Patient record disclosed to an unauthorised person" as disclosed
+incident      "Clinical system unavailable for a day"              as down
+
+asset         "Patient health record"               as ehr
+asset         "Availability of the clinical system" as avail
+
+region        "Hospital network"                    as net contains=shared,browse,nobackup,encrypted
+
+curious   -> shared
+shared    -> browse     "possible"
+browse    -> disclosed  "likely"
+
+ransom    -> nobackup
+nobackup  -> encrypted  "unlikely"
+encrypted -> down       "certain"
+
+outsider  -> vpn
+vpn       -> inside     "possible"
+inside    -> browse     "possible"
+
+disclosed -> ehr        "major"
+down      -> avail      "catastrophic"

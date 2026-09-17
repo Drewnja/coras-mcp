@@ -1,0 +1,17 @@
+# CORAS asset diagram: who cares about what.
+# Build it with:  coras_create_diagram  path=... text=<this file>
+
+diagram "Assets"
+
+stakeholder "Hospital management"                   as mgmt
+stakeholder "Patients"                              as patients
+asset       "Patient health record"                 as ehr
+asset       "Availability of the clinical system"   as avail
+asset       "Public trust"                          as trust
+
+mgmt     -> ehr          # a stakeholder owns an asset (plain line, no arrow head)
+mgmt     -> avail
+patients -> ehr
+patients -> trust
+avail    -> ehr          # one asset depends on another
+ehr      -> trust

@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "coras-mcp"
+version = "1.0.0"
+description = "MCP server that draws CORAS risk and threat diagrams for the SINTEF Threat Modelling Tool"
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "MIT" }
+keywords = ["mcp", "coras", "threat-modelling", "risk-analysis", "diagram"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Information Technology",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Security",
+]
+dependencies = []
+
+[project.scripts]
+coras-mcp = "coras_mcp.server:main"
+
+[tool.setuptools]
+packages = ["coras_mcp"]
+
+# The bundled editor lives in tool/, outside the package, so an installed
+# wheel will not carry it. Install from a clone (pip install -e .) to keep it,
+# or point at your own copy with `coras-mcp --set-tool-dir <path>`.

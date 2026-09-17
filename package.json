@@ -1,0 +1,53 @@
+{
+  "name": "coras-mcp",
+  "version": "1.0.0",
+  "description": "MCP server that turns a description in plain language into a CORAS risk or threat diagram, in the file format of the SINTEF Threat Modelling Tool (which it ships with).",
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "coras",
+    "threat-modelling",
+    "threat-modeling",
+    "risk-analysis",
+    "security",
+    "diagram",
+    "claude",
+    "ai"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/OWNER/coras-mcp#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OWNER/coras-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/OWNER/coras-mcp/issues"
+  },
+  "bin": {
+    "coras-mcp": "bin/cli.js"
+  },
+  "files": [
+    "bin/",
+    "coras_mcp/",
+    "java/src/",
+    "java/build.sh",
+    "java/build/coras-mcp-bridge.jar",
+    "tool/",
+    "examples/",
+    "README.md",
+    "LICENSE",
+    "NOTICE"
+  ],
+  "engines": {
+    "node": ">=16"
+  },
+  "os": [
+    "darwin",
+    "linux",
+    "win32"
+  ],
+  "scripts": {
+    "test": "python3 tests/test_coras_mcp.py",
+    "build:bridge": "bash java/build.sh"
+  }
+}

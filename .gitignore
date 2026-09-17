@@ -1,0 +1,26 @@
+# build output
+java/build/classes/
+*.class
+
+# python
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+/build/
+/dist/
+
+# node
+node_modules/
+*.tgz
+
+# editor leftovers
+*.bak
+*.dgx.bak*
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# the prebuilt bridge jar IS committed on purpose: it lets a clone work with a
+# plain JRE, without a JDK to compile it. Rebuild it with java/build.sh.
+!java/build/coras-mcp-bridge.jar

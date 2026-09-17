@@ -1,0 +1,34 @@
+# CORAS treatment diagram: the same picture with countermeasures attached.
+# A treatment points, with a dashed arrow, at the threat, vulnerability,
+# threat scenario or unwanted incident it addresses. It may NOT point at a
+# risk -- the file format rejects that.
+
+diagram "Treatments"
+
+threat        "Curious staff member"               as curious kind=accidental
+threat        "Ransomware"                         as ransom  kind=non-human
+vulnerability "Shared clinical workstation login"  as shared
+vulnerability "No offline backup"                  as nobackup
+scenario      "Staff member browses records"       as browse
+scenario      "Files encrypted by ransomware"      as encrypted
+incident      "Patient record disclosed"           as disclosed
+incident      "Clinical system unavailable"        as down
+asset         "Patient health record"              as ehr
+asset         "Availability of the clinical system" as avail
+
+treatment     "Role based access control"          as rbac
+treatment     "Off-site encrypted backup"          as backup    
+treatment     "Security awareness training"        as training
+
+curious   -> shared
+shared    -> browse     "possible"
+browse    -> disclosed  "likely"
+ransom    -> nobackup
+nobackup  -> encrypted  "unlikely"
+encrypted -> down       "certain"
+disclosed -> ehr        "major"
+down      -> avail      "catastrophic"
+
+rbac      -> shared
+backup    -> nobackup   strategy=ReduceConsequence
+training  -> curious     strategy=ReduceLikelihood

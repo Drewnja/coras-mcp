@@ -1,0 +1,40 @@
+coras-mcp
+=========
+
+The MCP server, the layout engine, the .dgx reader/writer, the text notation
+and the Java bridge (everything outside tool/) are original work, published
+under the MIT licence in LICENSE.
+
+
+Bundled third-party software: the CORAS diagram editor
+------------------------------------------------------
+
+tool/ contains the CORAS diagram editor 2.0 ("Threat Modelling Tool", 2007) by
+SINTEF, together with the libraries it ships with. It is redistributed here
+**unmodified, byte for byte**, so that the MCP server has something to draw
+into and to render with.
+
+    Project:  CORAS Risk Assessment Platform
+    Upstream: https://sourceforge.net/projects/coras/
+              http://coras.sourceforge.net
+    Licence:  GNU Lesser General Public License, version 2.1
+              (the full text is in tool/LICENSE.txt)
+
+Under the LGPL you may use, copy, modify and redistribute these binaries on
+the terms of that licence. The corresponding source code is available from the
+upstream project's code repository at
+
+    https://sourceforge.net/p/coras/code/
+
+and the maintainers of this repository will, on request, pass on the source
+they received, for at least three years from the date of distribution.
+
+Nothing in tool/ has been changed. This project links to it only by running it
+as a separate process (a command line helper compiled against its public
+classes, in java/), which the LGPL permits without affecting the licence of
+the rest of this repository.
+
+The libraries in tool/lib/ carry their own licences: Apache Batik and Apache
+Commons Lang (Apache License 2.0), JGraph 5 (LGPL), JAXB and the activation
+framework (CDDL), log4j (Apache License 2.0), JUG (LGPL/ASL). They are
+redistributed unmodified as part of the editor's original distribution.

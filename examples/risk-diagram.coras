@@ -1,0 +1,22 @@
+# CORAS risk diagram: unwanted incidents collapsed into named risks.
+# A risk may be initiated by a threat or an unwanted incident, and harms an
+# asset. This is the view you show management.
+
+diagram "Risk overview"
+
+threat    "Insider"                            as ins
+incident  "Personal data copied to a USB stick" as usb
+risk      "R1: leak of personal data"          as r1
+risk      "R2: extended outage"                as r2
+asset     "Personal data"                      as pd
+asset     "Service uptime"                     as up
+treatment "Data loss prevention"               as dlp
+comment   "Reviewed at the risk workshop"      as note
+
+ins -> r1
+ins -> r2
+usb -> r1   "likely"
+r1  -> pd   "major"
+r2  -> up   "moderate"
+dlp -> usb
+note -> r1

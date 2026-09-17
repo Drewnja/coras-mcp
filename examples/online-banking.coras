@@ -1,0 +1,37 @@
+# The picture used in the README.
+
+diagram "Online banking risks"
+
+stakeholder   "The bank"                          as bank
+asset         "Customer data"                     as data
+asset         "Reputation"                        as rep
+threat        "Script kiddie"                     as kiddie   kind=deliberate
+threat        "Careless employee"                 as staff    kind=accidental
+threat        "Malware"                           as malware  kind=non-human
+vulnerability "Weak password policy"              as weakpw
+vulnerability "Unpatched web server"              as unpatched
+scenario      "Password guessed by brute force"   as guess
+scenario      "Server compromised"                as compromise
+incident      "Customer records leaked"           as leak
+incident      "Service unavailable"               as outage
+treatment     "Enforce two-factor auth"           as mfa
+treatment     "Monthly patch window"              as patching
+comment       "Reviewed by security team, Sept 2026" as note
+
+bank       -> data
+bank       -> rep
+data       -> rep
+kiddie     -> weakpw
+staff      -> weakpw
+malware    -> unpatched
+weakpw     -> guess       "likely"
+unpatched  -> compromise  "possible"
+guess      -> leak        "likely"
+compromise -> leak        "possible"
+compromise -> outage      "rare"
+leak       -> data        "major"
+leak       -> rep         "moderate"
+outage     -> rep         "minor"
+mfa        -> guess
+patching   -> unpatched
+note       -> leak

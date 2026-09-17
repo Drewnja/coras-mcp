@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+# Starts the SINTEF CORAS "Threat Modelling Tool" (diagram editor 2.0, 2007)
+# with the flags it needs on a modern JRE.
+#
+#   coras-tool [file.dgx]
+#
+# Why the flags: the tool ships JAXB 2.0.3, which generates accessor classes at
+# run time.  Java 9 and later block that, and without
+# -Dcom.sun.xml.bind.v2.bytecode.ClassTailor.noOptimize=true the editor throws
+# ExceptionInInitializerError the moment you open or save a file.
+set -euo pipefail
+
+here="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+project="$(cd "$here/.." && pwd)"
+app_dir="${CORAS_TOOL_DIR:-$project/tool}"
+
+editor_jar=""
+for candidate in "$app_dir"/diagram-editor-*.jar; do
+  [ -f "$candidate" ] && editor_jar="$candidate" && break
+done
+if [ -z "$editor_jar" ]; then
+  echo "error: no diagram-editor-*.jar in $app_dir" >&2
+  echo "       set CORAS_TOOL_DIR to the folder holding it and lib/" >&2
+  exit 1
+fi
+
+java_bin="java"
+if [ -n "${CORAS_JAVA:-}" ]; then
+  java_bin="${CORAS_JAVA%/}"
+  [ -d "$java_bin" ] && java_bin="$java_bin/bin/java"
+elif [ -n "${JAVA_HOME:-}" ] && [ -x "$JAVA_HOME/bin/java" ]; then
+  java_bin="$JAVA_HOME/bin/java"
+fi
+if ! command -v "$java_bin" >/dev/null 2>&1 && [ ! -x "$java_bin" ]; then
+  echo "error: no Java runtime found. Install one, or set CORAS_JAVA." >&2
+  exit 1
+fi
+
+flags=(
+  -Dcom.sun.xml.bind.v2.bytecode.ClassTailor.noOptimize=true
+  -Djava.awt.headless=false
+  "-Xdock:name=Threat Modelling Tool"
+)
+
+cp="$editor_jar"
+for jar in "$app_dir"/lib/*.jar; do
+  cp="$cp:$jar"
+done
+
+bridge="$project/java/build/coras-mcp-bridge.jar"
+if [ $# -gt 0 ] && [ -f "$bridge" ]; then
+  # The editor has no command line, so open the file through the helper.
+  exec "$java_bin" "${flags[@]}" -cp "$bridge:$cp" coras.mcp.Bridge open "$1"
+fi
+
+if [ $# -gt 0 ]; then
+  echo "note: the Java helper is not built, so $1 must be opened from File > Open" >&2
+  echo "      (build it with $project/java/build.sh)" >&2
+fi
+exec "$java_bin" "${flags[@]}" -cp "$cp" com.vikash.firsttool.ToolMain
