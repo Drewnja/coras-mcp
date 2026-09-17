@@ -7,7 +7,7 @@ work before handing it to you.
 
 The 2007 editor is bundled, so there is nothing else to download.
 
-![A CORAS risk diagram generated from sixteen lines of text](docs/online-banking.png)
+![A CORAS risk diagram generated from sixteen lines of text](https://raw.githubusercontent.com/Drewnja/coras-mcp/main/docs/online-banking.png)
 
 <sub>Produced by `coras_create_diagram` from
 [`examples/online-banking.coras`](examples/online-banking.coras), then rendered
@@ -94,7 +94,7 @@ dependencies and talks MCP over stdio directly.
 ### From a clone instead
 
 ```bash
-git clone https://github.com/OWNER/coras-mcp.git
+git clone https://github.com/Drewnja/coras-mcp.git
 cd coras-mcp
 python3 tests/test_coras_mcp.py          # 54 tests, ~5 s
 claude mcp add coras -s user -- "$PWD/bin/coras-mcp"

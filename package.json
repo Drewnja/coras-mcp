@@ -15,13 +15,14 @@
     "ai"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/OWNER/coras-mcp#readme",
+  "author": "Drewnja (https://github.com/Drewnja)",
+  "homepage": "https://github.com/Drewnja/coras-mcp#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/OWNER/coras-mcp.git"
+    "url": "git+https://github.com/Drewnja/coras-mcp.git"
   },
   "bugs": {
-    "url": "https://github.com/OWNER/coras-mcp/issues"
+    "url": "https://github.com/Drewnja/coras-mcp/issues"
   },
   "bin": {
     "coras-mcp": "bin/cli.js"
