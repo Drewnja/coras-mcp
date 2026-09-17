@@ -1,5 +1,9 @@
 # coras-mcp
 
+[![tests](https://github.com/Drewnja/coras-mcp/actions/workflows/test.yml/badge.svg)](https://github.com/Drewnja/coras-mcp/actions/workflows/test.yml)
+[![npm](https://img.shields.io/npm/v/coras-mcp.svg)](https://www.npmjs.com/package/coras-mcp)
+[![licence](https://img.shields.io/badge/licence-MIT-blue.svg)](LICENSE)
+
 Describe a risk picture in words; get a real **CORAS** diagram, in a file the
 SINTEF *Threat Modelling Tool* opens natively — laid out the way a CORAS
 diagram is meant to read, and rendered back so the assistant can check its own
